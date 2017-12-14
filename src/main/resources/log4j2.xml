@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+   <!-- <Properties>
+        <Property name="basePath">log.txt</Property>
+    </Properties>-->
+
+    <Appenders>
+        <RollingFile name="fileLogger" fileName="loglog.txt" filePattern="logs/app-info-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <!--%date -  дата события и ее формат,
+                    %t - имя потока, породившего данное событие,
+                    %c{1} (org.ru -> ru)
+                    %l-->
+                <!--Паттерн определяет представление сообщения в лог файле(в данном случае) -->
+                <Pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %C; InvokeFromMethod = %M [%t] %c{3.} - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout   pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} [Method] =%M - %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!--name -указывает на пакет,который логируется данным логером, level - уровень с какого начинается логирование,
+        additivity -если true - То сообщения будут обрабатываться корневым логером, т.е логером, от которого все
+        остальные наследуются -->
+        <Logger name="ru.vsu" level="debug" additivity="true">
+            <!--appender-ref ref="fileLogger" level="debug" />-->
+            <appender-ref ref="fileLogger" level="debug" />
+        </Logger>
+        <Root level="debug" additivity="false">
+            <appender-ref ref="fileLogger" />
+        </Root>
+    </Loggers>
+</Configuration>
