@@ -1,24 +1,36 @@
 package ru.netcracker.config.webconfig;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import ru.netcracker.config.ServiceConfig;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 
-public class WebAppInitializer implements WebApplicationInitializer {
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("ru.netcracker.config");
-        servletContext.addListener(new ContextLoaderListener(context));
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
-    }
-}
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+                @Override
+            protected Class<?>[] getRootConfigClasses() {
+                return new Class[] {ServiceConfig.class};
+                //AppSecurityConfig.class
+
+            }
+            // Тут добавляем конфигурацию, в которой инициализируем ViewResolver
+            @Override
+            protected Class<?>[] getServletConfigClasses() {
+                return new Class<?>[]{
+                        WebConfig.class
+                };
+            }
+
+            @Override
+            protected String[] getServletMappings() {
+                return new String[]{"/"};
+            }
+
+          /*  AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+            context.setConfigLocation("ru.netcracker.config");
+            servletContext.addListener(new ContextLoaderListener(context));
+            ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
+            dispatcher.setLoadOnStartup(1);
+            dispatcher.addMapping("/");*/
+        }
+
+

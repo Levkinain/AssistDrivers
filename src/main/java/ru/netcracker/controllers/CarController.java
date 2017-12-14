@@ -18,15 +18,10 @@ public class CarController {
         this.carService = carService;
     }
 
-  /*  @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String getAllCars(Model model) {
-        model.addAttribute("cars", carService.getAll());
-        return "index";
-    }*/
-
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String sayHello() {
-       // model.addAttribute("field", "1234");
+    public String sayHello(Model model) {
+        model.addAttribute("field", "fdhfsh");
+        model.addAttribute("cars", carService.getAll());
         return "index";
     }
 

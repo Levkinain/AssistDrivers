@@ -40,6 +40,7 @@ public class CarDao implements Dao<Car> {
     @Override
     public List<Car> getAll() {
         String sql =  "SELECT * FROM  public.cars";
-        return jdbcTemplate.query(sql, new CarMapper());
+        List<Car> carList = jdbcTemplate.query(sql, new CarMapper());
+        return carList;
     }
 }

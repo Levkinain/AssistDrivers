@@ -14,18 +14,16 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan(basePackages = "ru.netcracker")
 public class ServiceConfig {
     /** Бин, отвечающий за инициализацию базы данных
      * @return source
      */
-    @Bean(name = "DataSource")
+    @Bean
     public DataSource getDataSource() {
         PGPoolingDataSource source = new PGPoolingDataSource();
-        source.setDataSourceName("DataSource");
         source.setServerName("localhost");
-        source.setDatabaseName("assistdriver");
+        source.setDatabaseName("postgres");
         source.setUser("postgres");
         source.setPassword("1234");
         source.setMaxConnections(10);

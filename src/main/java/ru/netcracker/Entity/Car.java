@@ -84,4 +84,9 @@ public class Car {
     public void setNumberAuto(String numberAuto) {
         this.numberAuto = numberAuto;
     }
+
+    @Override
+    public String toString() {
+        return model.toString() + " "  + color.toString() + " "  + numberAuto.toString();
+    }
 }
