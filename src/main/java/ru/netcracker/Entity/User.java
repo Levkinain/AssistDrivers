@@ -16,7 +16,7 @@ public class User {
     //поле, содержащее  пароль пользователя в системе
     private String password;
     //лист, содержащий роли пользователя в системе
-    private List<String> roles;
+    private String role;
 
     /**
      * Конструктор по умолчанию
@@ -29,13 +29,13 @@ public class User {
      * Объект типа {@code String} содержащий логин польщователя в системе
      * @param password
      * Объект типа {@code String} содержащий  пароль пользователя в системе
-     * @param roles
+     * @param role
      * Объект типа {@code String}, содержащий роли пользователя в системе
      */
-    public User(String login, String password, List<String> roles){
+    public User(String login, String password, String role){
         this.login = login;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 
     /**Метод, выполняющий получение объекта {@code String login}
@@ -67,6 +67,7 @@ public class User {
      * объект типа {@code String}, содержащий пароль пользователя в системе
      */
     public void setPassword(String password) {
+        //сначала пароль шифруется bCriptPasswordEncoder  - затем устанавливается значение
         this.password = password;
     }
 
@@ -74,16 +75,16 @@ public class User {
      * @return roles
      * объект типа {@code String}, содержащий роль пользователя в системе
      */
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
     /**Метод, выполняющий установку значения поля  {@code String roles}
-     * @param roles
+     * @param role
      * объект типа {@code String}, содержащий роль пользователя в системе
      */
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**Метод, переопределяющий стандартный метод родительского класса {@code Object} преобразования объекта в строку
@@ -92,6 +93,6 @@ public class User {
      */
     @Override
     public String toString() {
-        return User.class.getName() + " [login: "  + login.toString() +  ", roles: " + Arrays.toString(roles.toArray()) + " ]";
+        return User.class.getName() + " [login: "  + login.toString() +  ", role: " + role.toString() + " ]";
     }
 }
